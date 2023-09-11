@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: papayawhip;
+}
+
+.gameboard {
+    display: grid;
+    height: 50vh;
+    width: 50vh;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 3px;
+    background: black;
+
+}
+
+.square {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    padding: 0px;
+    background: papayawhip;
+}
+
+.controls {
+    margin-top: 15vh;
+}
