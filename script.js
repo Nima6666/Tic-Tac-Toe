@@ -49,6 +49,8 @@ const Game = (() => {
     let currentPlayerID = 0;
 
     const start = () => {
+        const gameboardtoac = document.querySelector('.gameboard');
+        gameboardtoac.classList.add('active');
         stateRun = true;
         startBtn.disabled = true;
         document.querySelector('#player1').disabled = true;
@@ -56,18 +58,22 @@ const Game = (() => {
         //document.querySelector('.controls').setAttribute('style', 'display: none;');
         players = [
             createPlayer(document.querySelector('#player1').value ? document.querySelector('#player1').value : 'player1', 'X'),
-            createPlayer(document.querySelector('#player2').value ? document.querySelector('#player1').value : 'player2', 'O')
-        ]
+            createPlayer(document.querySelector('#player2').value ? document.querySelector('#player2').value : 'player2', 'O')
+        ];
+
+        DisplayController.turnDisplay(players[currentPlayerID].name, stateRun);
 
         Gameboard.render();
     }
 
     const restart = () => {
+        currentPlayerID = 0;
         for (let i = 0;  i<9; i++) {
             Gameboard.update(i, "");
         }
         stateRun = true;
         DisplayController.clear();
+        DisplayController.turnDisplay(players[currentPlayerID].name, stateRun);
         Gameboard.render();
     }
 
@@ -75,12 +81,12 @@ const Game = (() => {
 
         if (!stateRun) {return;}
 
-        DisplayController.turnDisplay(players[currentPlayerID].name);
-
         let index = parseInt(event.target.id.split('-')[1]);
         if (Gameboard.getGameboard()[index] !== "") { return; };
         Gameboard.update(index, players[currentPlayerID].sign);
         Gameboard.render();
+        
+        DisplayController.turnDisplay(players[currentPlayerID].name, stateRun);
         
         
         if (checkWin(Gameboard.getGameboard(), players[currentPlayerID].sign)) {
@@ -90,8 +96,11 @@ const Game = (() => {
             stateRun = false;
             DisplayController.tieDisplay();
         }
-        currentPlayerID = currentPlayerID === 0 ? 1 : 0;
         
+        currentPlayerID = currentPlayerID === 0 ? 1 : 0;
+
+        DisplayController.turnDisplay(players[currentPlayerID].name, stateRun);
+
     }
 
 
@@ -109,7 +118,8 @@ const DisplayController = (() => {
 
     const inDisplay = document.querySelector('.display');
 
-    const turnDisplay = (name) => {
+    const turnDisplay = (name, stateRun) => {
+        if(!stateRun) {return}
         inDisplay.textContent = `${name}'s turn!!`
     }
 

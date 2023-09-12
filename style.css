@@ -1,3 +1,8 @@
+* {
+    font-family: 'Miniver', cursive;
+    font-family: 'Stylish', sans-serif;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,7 +11,12 @@ body {
     background: papayawhip;
 }
 
-.gameboard {
+.gameboard{
+    height: 50vh;
+    width: 50vh;
+}
+
+.gameboard.active {
     display: grid;
     height: 50vh;
     width: 50vh;
@@ -29,5 +39,47 @@ body {
 }
 
 .controls {
-    margin-top: 15vh;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.controls input {
+    border: none;
+    height: 50px;
+    margin: 5px;
+    border: 2px solid rgb(116, 150, 150);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    background: rgb(255, 244, 227);
+}
+
+.controls input:active {
+    border: 2px solid rgb(61, 78, 78);
+}
+.controls input:disabled {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.buttons {
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttons > button {
+    border: none;
+    border: 2px solid gold;
+    height: 35px;
+    border-radius: 5px;
+    background: rgb(243, 218, 186);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.buttons > button:active {
+    transition: 0.5s ease all;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.4);
 }
